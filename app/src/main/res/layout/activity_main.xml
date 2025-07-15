@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    android:visibility="visible"
+    tools:context=".MainActivity"
+    tools:visibility="visible"
+    tools:ignore="ExtraText">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="12dp"
+        android:background="#F9F9F9"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title=" 计算"
+        app:titleTextColor="#5A5A5A" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settings"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="设置"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        app:icon="@drawable/baseline_settings"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:iconTint="#A0A0A0"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+<!--    <com.google.android.material.textview.MaterialTextView-->
+<!--        android:id="@+id/materialTextView1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:textAlignment="textEnd"-->
+<!--        android:textColor="#5A5A5A"-->
+<!--        android:textSize="36sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="1.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <com.google.android.material.textview.MaterialTextView-->
+<!--        android:id="@+id/materialTextView2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:textAlignment="textEnd"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="48sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/materialTextView1" />-->
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:fadingEdgeLength="12dp"
+        android:overScrollMode="always"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_gravity="end"
+            android:textColor="#5A5A5A"
+            android:textSize="36sp" />
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:overScrollMode="always"
+        android:fadingEdgeLength="12dp"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView1">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_gravity="end"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            />
+    </HorizontalScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/history"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="历史记录"
+        android:minWidth="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:textAlignment="textEnd"
+        app:icon="@drawable/baseline_history"
+        app:iconSize="30dp"
+        app:iconTint="#A0A0A0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton1"
+        app:layout_constraintStart_toStartOf="@+id/circleButton1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton1"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="("
+        android:textColor="#DE5350"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton5"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton2"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text=")"
+        android:textColor="#DE5350"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton6"
+        app:layout_constraintStart_toEndOf="@+id/circleButton1"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton3"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton3"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="⌫"
+        android:textColor="#DE5350"
+        android:textSize="23sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton7"
+        app:layout_constraintStart_toEndOf="@+id/circleButton2"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton4"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton4"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="+"
+        android:textColor="#DE5350"
+        android:textSize="30sp"
+        app:backgroundTint="#F6E8E5"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleButton3"
+        app:rippleColor="#F5C6BE"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton5"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="1"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton6"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton6"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="2"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton10"
+        app:layout_constraintStart_toEndOf="@+id/circleButton5"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton7"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton7"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="3"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton11"
+        app:layout_constraintStart_toEndOf="@+id/circleButton6"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton8"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton8"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="–"
+        android:textColor="#DE5350"
+        android:textSize="30sp"
+        app:backgroundTint="#F6E8E5"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleButton7"
+        app:rippleColor="#F5C6BE"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton9"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="4"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton13"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton10"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton10"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="5"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton14"
+        app:layout_constraintStart_toEndOf="@+id/circleButton9"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton11"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton11"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="6"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton15"
+        app:layout_constraintStart_toEndOf="@+id/circleButton10"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton12"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton12"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="×"
+        android:textColor="#DE5350"
+        android:textSize="30sp"
+        app:backgroundTint="#F6E8E5"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleButton11"
+        app:rippleColor="#F5C6BE"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton13"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="7"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton17"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton14"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton14"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="8"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton18"
+        app:layout_constraintStart_toEndOf="@+id/circleButton13"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton15"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton15"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="9"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton19"
+        app:layout_constraintStart_toEndOf="@+id/circleButton14"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton16"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton16"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="÷"
+        android:textColor="#DE5350"
+        android:textSize="30sp"
+        app:backgroundTint="#F6E8E5"
+        app:layout_constraintBottom_toTopOf="@+id/circleButton20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleButton15"
+        app:rippleColor="#F5C6BE"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton17"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="C"
+        android:textColor="#DE5350"
+        android:textSize="23sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton18"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton18"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="0"
+        android:textColor="#5A5A5A"
+        android:textSize="26sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleButton17"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton19"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton19"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="."
+        android:textColor="#5A5A5A"
+        android:textSize="30sp"
+        app:backgroundTint="#F0F0F0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleButton18"
+        app:layout_constraintEnd_toStartOf="@+id/circleButton20"
+        app:rippleColor="#E0E0E0"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/circleButton20"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:text="="
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:backgroundTint="#D96B52"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleButton19"
+        app:rippleColor="#F2A39F"
+        app:shapeAppearanceOverlay="@style/CircleButtonStyle"
+        app:strokeWidth="0dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
