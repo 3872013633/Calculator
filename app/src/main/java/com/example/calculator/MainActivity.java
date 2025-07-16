@@ -7,15 +7,22 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private Calculate calculator;
     private MaterialTextView textViewExpression;
     private MaterialTextView textViewResult;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        MaterialButton buttonHistory = findViewById(R.id.history);
+        buttonHistory.setOnClickListener(v -> {
+
+            HistoryFragment historyFragment = new HistoryFragment();
+            historyFragment.show(getSupportFragmentManager(), "fragment_history");
+
         });
 
         MaterialButton buttonSettings = findViewById(R.id.settings);
@@ -199,37 +213,32 @@ public class MainActivity extends AppCompatActivity {
 
         MaterialButton buttonEquals = findViewById(R.id.circleButton20);
         buttonEquals.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             try {
-                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
                 calculator = new Calculate(expressing);
                 if (calculator.isSecure()) {
                     String result = calculator.getResult().toString();
                     if(result.length() > 10) {
-                        float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
                         if(startSize < 36)
-                            animateTextSize(textViewResult, startSize, 36, 167);
+                            animateTextSize(textViewResult, startSize, 36, 180);
                     }
                     else {
-                        float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
                         if(startSize < 48)
-                            animateTextSize(textViewResult, startSize, 48, 167);
+                            animateTextSize(textViewResult, startSize, 48, 180);
                     }
                     textViewResult.setTextColor(Color.parseColor("#000000"));
                     textViewResult.setText(result);
                 } else {
-                    float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
-                    if(startSize < 48)
-                        animateTextSize(textViewResult, startSize, 48, 167);
-                    textViewResult.setTextColor(Color.parseColor("#000000"));
+                    textViewResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                    textViewResult.setTextColor(Color.parseColor("#878787"));
                     textViewResult.setText("错误");
                 }
             } catch (ArithmeticException | NullPointerException | NumberFormatException e) {
                 if(expressing.length() == 0) textViewResult.setText("");
                 else {
-                    float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
-                    if(startSize < 48)
-                        animateTextSize(textViewResult, startSize, 48, 167);
-                    textViewResult.setTextColor(Color.parseColor("#000000"));
+                    textViewResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                    textViewResult.setTextColor(Color.parseColor("#878787"));
                     textViewResult.setText("错误");
                 }
             }
@@ -254,24 +263,21 @@ public class MainActivity extends AppCompatActivity {
             calculator = new Calculate(expressing);
             if (calculator.isSecure()) {
                 String result = calculator.getResult().toString();
-                float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
-                if(startSize != 24)
-                    animateTextSize(textViewResult, startSize, 24, 167);
+                textViewResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                 textViewResult.setTextColor(Color.parseColor("#878787"));
                 textViewResult.setText(result);
             } else {
-                float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
-                if(startSize < 48)
-                    animateTextSize(textViewResult, startSize, 48, 167);
-                textViewResult.setTextColor(Color.parseColor("#000000"));
-                textViewResult.setText("");
+                textViewResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                textViewResult.setTextColor(Color.parseColor("#878787"));
+                textViewResult.setText("错误");
             }
         } catch (ArithmeticException | NullPointerException | NumberFormatException e) {
-            float startSize = textViewResult.getTextSize() / getResources().getDisplayMetrics().scaledDensity;
-            if(startSize < 48)
-                animateTextSize(textViewResult, startSize, 48, 167);
-            textViewResult.setTextColor(Color.parseColor("#000000"));
-            textViewResult.setText("");
+            if(expressing.length() == 0) textViewResult.setText("");
+            else {
+                textViewResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+                textViewResult.setTextColor(Color.parseColor("#878787"));
+                textViewResult.setText("错误");
+            }
         }
     }
 
