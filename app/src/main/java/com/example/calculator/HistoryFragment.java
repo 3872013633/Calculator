@@ -1,6 +1,8 @@
 package com.example.calculator;
 
 import android.app.Dialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -11,9 +13,11 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -23,7 +27,11 @@ public class HistoryFragment extends DialogFragment {
 
     private List<HistoryItem> historyList = new ArrayList<>();
     private RecyclerView recyclerView;
+
+    private MaterialButton clearButton;
     private HistoryViewAdapter historyViewAdapter;
+
+    private HistoryDatabaseHelper dbHelper;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -39,12 +47,25 @@ public class HistoryFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
+
         recyclerView = rootView.findViewById(R.id.recycler_view);
+
+        dbHelper = new HistoryDatabaseHelper(requireContext());
         loadHistoryData();
+
         historyViewAdapter = new HistoryViewAdapter();
         recyclerView.setAdapter(historyViewAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        clearButton = rootView.findViewById(R.id.clear);
+        clearButton.setOnClickListener(v -> {
+            historyList.clear();
+            historyViewAdapter.notifyDataSetChanged();
+            db.execSQL("DELETE FROM History;");
+            db.execSQL("VACUUM;");
+        });
 
         return rootView;
     }
@@ -68,9 +89,18 @@ public class HistoryFragment extends DialogFragment {
     }
 
     private void loadHistoryData() {
-        for(int i = 1; i <= 10; ++i){
-            historyList.add(new HistoryItem("2025.7." + i, "1+1", "=2"));
+        historyList.clear();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM History ORDER BY id DESC", null);
+
+        while (cursor.moveToNext()) {
+            String time = cursor.getString(cursor.getColumnIndexOrThrow("time"));
+            String expression = cursor.getString(cursor.getColumnIndexOrThrow("expression"));
+            String result = cursor.getString(cursor.getColumnIndexOrThrow("result"));
+            historyList.add(new HistoryItem(time, expression, result));
         }
+
+        if(cursor != null) cursor.close();
     }
 
     class HistoryViewAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
@@ -90,6 +120,18 @@ public class HistoryFragment extends DialogFragment {
             holder.time.setText(historyItem.getTime());
             holder.expression.setText(historyItem.getExpression());
             holder.result.setText(historyItem.getResult());
+
+            holder.expression.setOnClickListener(v -> {
+                HistoryViewModel viewModel = new ViewModelProvider(requireActivity())
+                        .get(HistoryViewModel.class);
+                viewModel.setExpression(historyItem.getExpression());
+            });
+
+            holder.result.setOnClickListener(v -> {
+                HistoryViewModel viewModel = new ViewModelProvider(requireActivity())
+                        .get(HistoryViewModel.class);
+                viewModel.setExpression(historyItem.getRealResult());
+            });
         }
 
         @Override

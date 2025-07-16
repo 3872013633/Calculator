@@ -11,16 +11,20 @@ public class HistoryItem {
         this.result = result;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     public String getExpression() {
         return expression;
     }
 
     public String getResult() {
-        return result;
+        return "=" + result;
     }
 
-    public String getTime() {
-        return time;
+    public String getRealResult() {
+        return result;
     }
 
 }

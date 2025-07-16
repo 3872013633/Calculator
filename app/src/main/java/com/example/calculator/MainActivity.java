@@ -2,27 +2,27 @@ package com.example.calculator;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private Calculate calculator;
     private MaterialTextView textViewExpression;
     private MaterialTextView textViewResult;
+
+    private HistoryDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,6 +231,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                     textViewResult.setTextColor(Color.parseColor("#000000"));
                     textViewResult.setText(result);
+
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+                    ContentValues values = new ContentValues();
+                    values.put("time", new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault()).format(new Date()));
+                    values.put("expression", expressing.toString());
+                    values.put("result", calculator.getResult().toString());
+                    db.insert("History", null, values);
+                    values.clear();
+
                 } else {
                     textViewResult.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
                     textViewResult.setTextColor(Color.parseColor("#878787"));
@@ -243,6 +254,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        HistoryViewModel viewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
+        viewModel.getExpression().observe(this, item -> {
+            expressing.append(item);
+            showExpressing();
+            showResult();
+        });
+
+        dbHelper = new HistoryDatabaseHelper(this);
+        dbHelper.getWritableDatabase();
     }
 
     private void initialize(){

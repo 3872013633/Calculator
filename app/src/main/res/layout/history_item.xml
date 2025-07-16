@@ -14,19 +14,19 @@
         android:scrollbars="none">
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:layout_gravity="end|center_vertical"
             android:text="今天"
             android:textColor="#D35C58"
-            android:textSize="18sp"
+            android:textSize="12sp"
             />
     </HorizontalScrollView>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:overScrollMode="always"
@@ -40,13 +40,16 @@
             android:layout_gravity="end"
             android:text="2×12"
             android:textColor="#8A8A8A"
-            android:textSize="24sp"
+            android:textSize="16sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             />
     </HorizontalScrollView>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:overScrollMode="always"
@@ -54,13 +57,16 @@
         android:scrollbars="none">
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/result"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:layout_gravity="end|center_vertical"
             android:text="=24"
             android:textColor="#595959"
-            android:textSize="27sp"
+            android:textSize="22sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
             />
     </HorizontalScrollView>
 
