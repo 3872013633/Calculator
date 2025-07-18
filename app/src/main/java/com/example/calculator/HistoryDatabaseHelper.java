@@ -13,7 +13,6 @@ public class HistoryDatabaseHelper extends SQLiteOpenHelper {
                     "time text, " +
                     "expression text, " +
                     "result text)";
-
     private Context context;
 
     public HistoryDatabaseHelper(Context context) {

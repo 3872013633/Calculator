@@ -98,7 +98,6 @@
             android:textColor="#5A5A5A"
             android:textSize="36sp" />
     </HorizontalScrollView>
-
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView2"
         android:layout_width="0dp"

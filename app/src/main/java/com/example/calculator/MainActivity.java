@@ -22,7 +22,9 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private Calculate calculator;
     private MaterialTextView textViewExpression;
     private MaterialTextView textViewResult;
-
     private HistoryDatabaseHelper dbHelper;
+    private static Set<Character> hs = Set.of('+', '-', '×', '÷');
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +170,11 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton buttonPlus = findViewById(R.id.circleButton4);
         buttonPlus.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            expressing.append('+');
+            if(expressing.length() == 0 || !hs.contains(expressing.charAt(expressing.length() - 1))) {
+                expressing.append('+');
+            }else {
+                expressing.setCharAt(expressing.length() - 1, '+');
+            }
             showExpressing();
             showResult();
         });
@@ -176,7 +182,11 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton buttonMinus = findViewById(R.id.circleButton8);
         buttonMinus.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            expressing.append('-');
+            if(expressing.length() == 0 || !hs.contains(expressing.charAt(expressing.length() - 1))) {
+                expressing.append('-');
+            }else {
+                expressing.setCharAt(expressing.length() - 1, '-');
+            }
             showExpressing();
             showResult();
         });
@@ -184,7 +194,11 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton buttonMultiply = findViewById(R.id.circleButton12);
         buttonMultiply.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            expressing.append('×');
+            if(expressing.length() == 0 || !hs.contains(expressing.charAt(expressing.length() - 1))) {
+                expressing.append('×');
+            }else {
+                expressing.setCharAt(expressing.length() - 1, '×');
+            }
             showExpressing();
             showResult();
         });
@@ -192,7 +206,11 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton buttonDivide = findViewById(R.id.circleButton16);
         buttonDivide.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            expressing.append('÷');
+            if(expressing.length() == 0 || !hs.contains(expressing.charAt(expressing.length() - 1))) {
+                expressing.append('÷');
+            }else {
+                expressing.setCharAt(expressing.length() - 1, '÷');
+            }
             showExpressing();
             showResult();
         });
